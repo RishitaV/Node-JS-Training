@@ -1,0 +1,42 @@
+1)
+app.get('/localhost/3000', (req, res) => {
+  res.json(books);
+});
+
+2)
+app.post('/api/books', (req, res) => {
+  const newBook = req.body;
+  newBook.id = books.length + 1; 
+  books.push(newBook); 
+  res.status(201).json(newBook);
+});
+
+3)
+app.get('/localhost/3000/:id', (req, res) => {
+  res.json(book);
+});
+
+4)
+Update a Book
+app.put('/api/books/:id', (req, res) => {
+  const bookId = parseInt(req.params.id);
+  const updatedBook = req.body;
+  const bookIndex = books.findIndex((book) => book.id === bookId);
+  if (bookIndex === -1) {
+    return res.status(404).json({ error: 'Book not found' });
+  }
+  books[bookIndex] = { ...books[bookIndex], ...updatedBook };
+  res.json(books[bookIndex]);
+});
+
+5)
+Delete a Book
+app.delete('/api/books/:id', (req, res) => {
+  const bookId = parseInt(req.params.id);
+  const bookIndex = books.findIndex((book) => book.id === bookId);
+  if (bookIndex === -1) {
+    return res.status(404).json({ error: 'Book not found' });
+  }
+  books.splice(bookIndex, 1);
+  res.sendStatus(204);
+});
