@@ -1,0 +1,251 @@
+1)
+
+Name: Retrieve a List of Books
+Path: /localhost/3000
+  1) 200 OK:
+      {
+        "status": "success",
+        "message": "Records retrieved successfully",
+        "data": [
+          { "id": 1, "name": "Record 1" },
+          { "id": 2, "name": "Record 2" },
+          { "id": 3, "name": "Record 3" }
+        ]
+      }
+  2) 204 No Content:
+      {
+        "status": "success",
+        "message": "No records found",
+        "data": []
+      }
+  3) 206 Partial Content:
+      {
+        "status": "success",
+        "message": "Partial records retrieved",
+        "data": [
+          { "id": 1, "name": "Record 1" },
+          { "id": 2, "name": "Record 2" }
+        ],
+        "page": 1,
+        "total_pages": 3
+      }
+  4) 400 Bad Request:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Invalid request parameters"
+      }
+
+  5) 401 Unauthorized:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Unauthorized: Authentication required"
+      }
+
+  6) 403 Forbidden:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Access denied: Insufficient permissions"
+      }
+
+  7) 404 Not Found:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Resource not found"
+      }
+
+  8) 500 Internal Server Error:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Internal server error"
+      }
+
+2)
+
+Name: Add a New Book
+Path: /books
+  1) 201 Created:
+      Response Object:
+      {
+        "status": "success",
+        "message": "Book added successfully",
+        "data": { "id": 123, "title": "New Book" }
+      }
+  2) 400 Bad Request:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Invalid request parameters"
+      }
+  3) 401 Unauthorized:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Unauthorized: Authentication required"
+      }
+  4) 403 Forbidden:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Access denied: Insufficient permissions"
+      }
+  5) 422 Unprocessable Entity:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Unprocessable Entity: Validation failed",
+        "errors": [
+          { "field": "title", "message": "Title is required" },
+          { "field": "author", "message": "Author is required" }
+        ]
+      }
+  6) 500 Internal Server Error:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Internal server error"
+      }
+
+3)
+
+Name: Add a New Book
+Path: /books/{bookId}
+  1) 200 OK:
+      Response Object:
+      {
+        "status": "success",
+        "message": "Book retrieved successfully",
+        "data": {
+          "id": 123,
+          "title": "The Great Gatsby",
+          "author": "F. Scott Fitzgerald",
+          "publishedYear": 1925
+        }
+      }
+  2) 404 Not Found:
+      Response Object:
+      {
+        "status": "error",
+        "message": "Book not found"
+      }
+  3) 400 Bad Request (If the request is malformed or contains invalid parameters):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Invalid request parameters"
+      }
+  4) 401 Unauthorized (If authentication is required and the client is not authenticated):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Unauthorized: Authentication required"
+      }
+  5) 403 Forbidden (If the client is authenticated but lacks permission to access the book):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Access denied: Insufficient permissions"
+      }
+  6) 500 Internal Server Error (If an unexpected server error occurs):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Internal server error"
+      }
+
+4)
+
+Name: Update a Book
+Path: /books/{bookId}
+  1) 200 OK:
+    Response Object:
+    {
+      "status": "success",
+      "message": "Book updated successfully",
+      "data": {
+        "id": 123,
+        "title": "Updated Book Title",
+        "author": "New Author",
+        "publishedYear": 2023
+      }
+    }
+  2) 204 No Content (If the update was successful and there is no content to return):
+      Response Object: No JSON response body.
+  3) 400 Bad Request (If the request is malformed or contains invalid parameters):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Invalid request parameters"
+      }
+  4) 401 Unauthorized (If authentication is required, and the client is not authenticated):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Unauthorized: Authentication required"
+      }
+  5) 403 Forbidden (If the client is authenticated but lacks permission to update the book):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Access denied: Insufficient permissions"
+      }
+  6) 404 Not Found (If the book to be updated does not exist):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Book not found"
+      }
+  7) 500 Internal Server Error (If an unexpected server error occurs):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Internal server error"
+      }
+
+5)
+
+Name: Update a Book
+Path: /books/{bookId}
+
+  1) 204 No Content (If the delete was successful and there is no content to return):
+      Response Object: No JSON response body.
+  2) 200 OK (If the delete was successful and you want to provide a response with additional information):
+      Response Object:
+      {
+        "status": "success",
+        "message": "Book deleted successfully"
+      }
+  3) 404 Not Found (If the book to be deleted does not exist):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Book not found"
+      }
+  4) 400 Bad Request (If the request is malformed or contains invalid parameters):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Invalid request parameters"
+      }
+  5) 401 Unauthorized (If authentication is required, and the client is not authenticated):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Unauthorized: Authentication required"
+      }
+  6) 403 Forbidden (If the client is authenticated but lacks permission to delete the book):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Access denied: Insufficient permissions"
+      }
+  7) 500 Internal Server Error (If an unexpected server error occurs):
+      Response Object:
+      {
+        "status": "error",
+        "message": "Internal server error"
+      }
