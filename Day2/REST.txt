@@ -17,7 +17,6 @@ app.get('/localhost/3000/:id', (req, res) => {
 });
 
 4)
-Update a Book
 app.put('/api/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const updatedBook = req.body;
@@ -30,7 +29,6 @@ app.put('/api/books/:id', (req, res) => {
 });
 
 5)
-Delete a Book
 app.delete('/api/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const bookIndex = books.findIndex((book) => book.id === bookId);
